@@ -6,21 +6,15 @@
 
 {% block "css-links" %}
 <link rel="stylesheet" href="{%static "blogs/index.css"%}">
+<link rel="stylesheet" href="{%static "blogs/include/post.css"%}">
 
 {% endblock  %}
 
 
-
 {% block "page-contents" %}
-    <header id="main-navigation">
-        <h1><a href="">Subodh's Blog</a></h1>
-        <nav>
-            <a href="">All post</a>
-        </nav>
-    </header>
     <section id = "welcome">
         <header>
-            <img src="" alt="Subodh - the author">
+            <img src="{% static "blogs/images/max.png" %}" alt="Subodh - the author">
             <h2>SUBODH BLOG</h2>
         </header>
         <p>Hi i am subodh and i love to blog</p>
@@ -29,17 +23,7 @@
     <section id="latest-posts">
         <h2>My Leatest Thoughts</h2>
         <ul>
-            <li>
-                <article class="post">
-                    <a href="">
-                        <img src="" alt="Mountain">
-                        <div class="post__content">
-                            <h3>Mountain Hiking</h3>
-                            <p>Theres nothing like the views you get when hiking in the mountain, i wasnt even prepared about how was about to happen</p>
-                        </div>
-                    </a>
-                </article>
-            </li>
+            {% include "blogs/include/post.html" %}
         </ul>
 
     </section>

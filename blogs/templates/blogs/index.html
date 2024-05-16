@@ -11,6 +11,7 @@
 {% endblock  %}
 
 
+
 {% block "page-contents" %}
     <section id = "welcome">
         <header>
@@ -23,7 +24,9 @@
     <section id="latest-posts">
         <h2>My Leatest Thoughts</h2>
         <ul>
+            {% for post in posts %}
             {% include "blogs/include/post.html" %}
+            {% endfor %}
         </ul>
 
     </section>

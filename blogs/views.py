@@ -34,7 +34,7 @@ all_posts = [
      {
         "slug": "programming-is-fun",
         "image": "coding.jpg",
-        "author": "Maximilian",
+        "author": "Subodh",
         "date": date(2022, 3, 10),
         "title": "Programming Is Great!",
         "excerpt": "Did you ever spend hours searching that one error in your code? Yep - that's what happened to me yesterday...",
@@ -55,7 +55,7 @@ all_posts = [
     {
         "slug": "into-the-woods",
         "image": "woods.jpg",
-        "author": "Maximilian",
+        "author": "Subodh",
         "date": date(2020, 8, 5),
         "title": "Nature At Its Best",
         "excerpt": "Nature is amazing! The amount of inspiration I get when walking in nature is incredible!",

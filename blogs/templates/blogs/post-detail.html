@@ -13,9 +13,14 @@
 {% block "page-contents" %}
    <section id = "summary">
     <h2>{{one_post.title}}</h2>
+    <div>
+        {% for tag in post_tags %}
+            <span class="tag">{{tag}}</span>
+        {% endfor %}
+    </div>
     <article>
         <img src="{%static "blogs/images/"|add:one_post.image%}" alt="{{one_post.title}}">
-        <address>{{one_post.author|title}}</address>
+        <address>By <a href="mailto:{{one_post.author.email}}">{{one_post.author|title}}</a></address>
         <div>
             Last Updated on <time>{{one_post.date| date:"d M Y"}}</time>
         </div>

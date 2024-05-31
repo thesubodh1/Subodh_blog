@@ -7,4 +7,15 @@
 <link rel="stylesheet" href="{%static "blogs/read-later.css"%}">
 {% endblock "css-links" %}
 
-{% block "page-contents" %}{% endblock "page-contents" %}
+{% block "page-contents" %}
+<section id = "stored-posts">
+    {% if not has_posts %}
+    <p>You don't have any stored posts</p>
+    {% endif %}
+    <ul>
+        {% for post in posts %}
+        <li><a href="{%url "post-detail-page" post.slug%}">{{post.title}}</a></li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock "page-contents" %}

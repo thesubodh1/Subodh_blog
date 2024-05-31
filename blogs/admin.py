@@ -10,10 +10,10 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ("first_name", "last_name","email")
 
 class UserCommentAdmin(admin.ModelAdmin):
-    list_display = ("full_name", "email","comment","post")
+    list_display = ("full_name", "email","comment")
 
 
 admin.site.register(Post,PostAdmin)
 admin.site.register(Author)
 admin.site.register(Tag)
-admin.site.register(UserComments)
+admin.site.register(UserComments, UserCommentAdmin)

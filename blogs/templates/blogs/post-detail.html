@@ -11,6 +11,17 @@
 
 
 {% block "page-contents" %}
+
+<section>
+    {% if form.errors %}
+    <div id="alert">
+        <h2>Submission Error</h2>
+        <p>Error while submitting comment</p>
+        <a href="#comment-form">Fix!</a>
+    </div>
+    {% endif %}
+</section>
+
    <section id = "summary">
     <h2>{{one_post.title}}</h2>
     <div>
@@ -18,8 +29,17 @@
             <span class="tag">{{tag}}</span>
         {% endfor %}
     </div>
+
+    <div id = "read-later">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden", name="post_id" value="{{one_post.id}}">
+            <button>Read Later</button>
+        </form>
+    </div>
+
     <article>
-        <img src="{%static "blogs/images/"|add:one_post.image%}" alt="{{one_post.title}}">
+        <img src="{{one_post.image.url}}" alt="{{one_post.title}}">
         <address>By <a href="mailto:{{one_post.author.email}}">{{one_post.author|title}}</a></address>
         <div>
             Last Updated on <time>{{one_post.date| date:"d M Y"}}</time>
@@ -32,4 +52,28 @@
         {{one_post.content|linebreaks}}
     </p>
    </main>
+   <section id="comments">
+    <ul>
+        {% for comment in comments  %}
+          <li>
+            <h2>{{comment.full_name}}</h2>
+            <p>{{comment.comment|linebreaks}}</p>
+          </li>
+        {% endfor %}
+    </ul>
+   </section>
+
+   <section id="comment-form">
+    <form action="{%url "post-detail-page" one_post.slug%}" method ="POST">
+        {% csrf_token %}
+        {% for fields in form %}
+        <div class="form-control {% if fields.errors %}invalid{% endif %}">
+            {{fields.label_tag}}
+            {{fields}}
+            {{fields.errors}}
+        </div>
+        {% endfor %}
+        <button>Save Comment</button>
+    </form>
+   </section>
 {% endblock  %}

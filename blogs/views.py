@@ -4,6 +4,10 @@ from datetime import date
 from .models import Post
 from django.views.generic import ListView,DetailView
 from django.views import View
+from .forms import CommentForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 
 
@@ -61,3 +65,37 @@ class PostDetail(DetailView):
         post = self.object
         context["post_tags"] = post.tag.all()
         return context
+    
+
+class PostDetail(View):
+    def get(self,request,slug):
+        post = Post.objects.get(slug=slug)
+        context = {
+            "one_post" : post,
+            "post_tags" : post.tag.all(),
+            "form" : CommentForm,
+            "comments" : post.comment.all()
+        }
+        return render(request,"blogs/post-detail.html",context)
+
+    def post(self,request,slug):
+        post = Post.objects.get(slug = slug)
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+           comment =  form.save(commit=False)
+           comment.post = post
+           comment.save()
+           return HttpResponseRedirect(reverse("post-detail-page",args=[slug]))
+        
+        context = {
+            "one_post" : post,
+            "post_tags"  :post.tag.all(),
+            "form" : form,
+            "comments" : post.comment.all()
+        }
+        return render(request,"blogs/post-detail.html",context)
+    
+
+class ReadLater(View):
+    pass

@@ -32,3 +32,11 @@ class Post(models.Model):
         return f"{self.title} {self.excerpt} {self.content}"
 
 
+class UserComments(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    comment = models.TextField()
+    post = models.ForeignKey(Post,on_delete=models.CASCADE, null= True, related_name="comment")
+
+    def __str__(self):
+        return f"{self.full_name} {self.email} {self.comment} {self.post}"
